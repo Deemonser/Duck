@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="View">
+        <attr name="solid" format="reference|color" />
+        <attr name="corner" format="dimension" />
+        <attr name="corner_top_left" format="dimension" />
+        <attr name="corner_top_right" format="dimension" />
+        <attr name="corner_bottom_left" format="dimension" />
+        <attr name="corner_bottom_right" format="dimension" />
+        <attr name="focusable" format="boolean" />
+        <attr name="shape">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+        </attr>
+    </declare-styleable>
+
+
+</resources>
