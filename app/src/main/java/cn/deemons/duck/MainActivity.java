@@ -2,18 +2,11 @@ package cn.deemons.duck;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewParent;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import cn.deemons.library.ShapeUtils;
-
-import static android.graphics.drawable.GradientDrawable.OVAL;
 
 public class MainActivity extends AppCompatActivity {
 
