@@ -1,10 +1,8 @@
-package cn.deemons.library;
+package cn.deemons.library.shape;
 
-import android.content.res.ColorStateList;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
@@ -38,6 +36,11 @@ public class ShapeUtils {
     public ShapeUtils(@Shape int shape) {
         mDrawable = new GradientDrawable();
         mDrawable.setShape(shape);
+    }
+
+    public ShapeUtils shape(@Shape int shape) {
+        mDrawable.setShape(shape);
+        return this;
     }
 
     public ShapeUtils solid(@ColorInt int color) {

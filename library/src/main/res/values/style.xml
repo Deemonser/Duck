@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="MyView">
-        <attr format="reference|color" name="solid"/>
-        <attr format="dimension" name="corner"/>
-        <attr format="dimension" name="corner_top_left"/>
-        <attr format="dimension" name="corner_top_right"/>
-        <attr format="dimension" name="corner_bottom_left"/>
-        <attr format="dimension" name="corner_bottom_right"/>
-        <attr format="dimension" name="stroke_width"/>
-        <attr format="color" name="stroke_color"/>
-        <attr format="dimension" name="stroke_dash_gap"/>
-        <attr format="dimension" name="stroke_dash_width"/>
-        <attr format="boolean" name="focusable"/>
+    <declare-styleable name="Shape">
+        <attr name="solid" format="reference|color" />
+        <attr name="corner" format="dimension" />
+        <attr name="corner_top_left" format="dimension" />
+        <attr name="corner_top_right" format="dimension" />
+        <attr name="corner_bottom_left" format="dimension" />
+        <attr name="corner_bottom_right" format="dimension" />
+        <attr name="stroke_width" format="dimension" />
+        <attr name="stroke_color" format="color" />
+        <attr name="stroke_dash_gap" format="dimension" />
+        <attr name="stroke_dash_width" format="dimension" />
         <attr name="shape">
-            <flag name="rectangle" value="0"/>
-            <flag name="oval" value="1"/>
-            <flag name="line" value="2"/>
-            <flag name="right" value="3"/>
+            <flag name="rectangle" value="0" />
+            <flag name="oval" value="1" />
+            <flag name="line" value="2" />
+            <flag name="right" value="3" />
         </attr>
     </declare-styleable>
 
@@ -27,8 +26,8 @@
     <!--<attr name="android:layout_height"/>-->
     <!--<attr name="android:layout_margin"/>-->
     <!--<attr name="android:padding"/>-->
-        <!--<attr name="android:solid"/>-->
-<!--</declare-styleable>-->
+    <!--<attr name="android:solid"/>-->
+    <!--</declare-styleable>-->
 
 
-    </resources>
+</resources>
