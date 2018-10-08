@@ -10,24 +10,24 @@
     tools:context="cn.deemons.duck.MainActivity"
     tools:ignore="MissingPrefix">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:solid="#f06200" />
+    <!--<TextView-->
+        <!--android:id="@+id/text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Hello World!"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:solid="#f06200" />-->
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:corner="20dp"
-        app:stroke_color="#f06200"
-        app:stroke_width="1dp" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:corner="20dp"-->
+        <!--app:stroke_color="#f06200"-->
+        <!--app:stroke_width="1dp" />-->
 
 
     <LinearLayout
@@ -38,9 +38,9 @@
         app:corner="30dp"
         app:solid="@color/colorAccent">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!--<CheckBox-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
 
     </LinearLayout>
 

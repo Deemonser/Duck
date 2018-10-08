@@ -6,11 +6,14 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
@@ -38,35 +41,40 @@ public class AspectPlugin {
     public void callViewConstructor() {
     }
 
+    @Pointcut("execution(* *..LayoutInflater.Factory+.onCreateView(..))")
+    public void callLayoutInflater() {
+    }
+
+
     //@Pointcut("call(android.view.ViewGroup+.new(..))")
     @Pointcut("execution(android.view.ViewGroup+.new(..))")
     public void callViewGroupConstructor() {
     }
 
-    @After("callViewConstructor()")
-    public void method(JoinPoint joinPoint) throws Throwable {
+    @Around("callLayoutInflater()")
+    public Object method(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object result = joinPoint.proceed();
+
         Signature signature = joinPoint.getSignature();
         Log.i(TAG, "pointcut =====> " + signature.toString());
 
-        View view = (View) joinPoint.getTarget();
         Object[] args = joinPoint.getArgs();
 
-        int hashCode = view.hashCode();
-
-        if (filter(hashCode) || args.length < 2 || !(args[0] instanceof Context)) {
-            return;
+        int length = args.length;
+        if (length != 4) {
+            return result;
         }
-        lastHash = hashCode;
 
-        Context context = (Context) args[0];
+        Context context = (Context) args[length - 2];
 
-        AttributeSet attrs = (AttributeSet) args[1];
+        AttributeSet attrs = (AttributeSet) args[length - 1];
 
-        Log.i(TAG, "inject =====> " + signature.toString());
-        DuckFactor.getFactor().inject(view, context, attrs);
+        if (result instanceof View) {
+            Log.i(TAG, "inject =====> " + signature.toString());
+            DuckFactor.getFactor().inject((View) result, context, attrs);
+        }
+
+        return result;
     }
 
-    private boolean filter(int hashCode) {
-        return lastHash == hashCode;
-    }
 }
