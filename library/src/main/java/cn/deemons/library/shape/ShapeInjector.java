@@ -73,8 +73,6 @@ public class ShapeInjector implements Injector {
             }
         }
 
-        Log.i("Duck", "solid=" + solidColor + " ,corner=" + corner);
-
         if (utils != null) {
             view.setBackground(utils.create());
             Log.i("Duck", "createShape");

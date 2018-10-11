@@ -17,26 +17,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LayoutInflaterCompat.setFactory2(LayoutInflater.from(this), new LayoutInflater.Factory2() {
-            @Override
-            public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-
-                Log.e(TAG, "name = " + name);
-                int n = attrs.getAttributeCount();
-                for (int i = 0; i < n; i++) {
-                    Log.e(TAG, attrs.getAttributeName(i) + " , " + attrs.getAttributeValue(i));
-                }
-
-                return null;
-            }
-
-            @Override
-            public View onCreateView(String name, Context context, AttributeSet attrs) {
-
-                return null;
-            }
-        });
-
+//        LayoutInflaterCompat.setFactory2(LayoutInflater.from(this), new LayoutInflater.Factory2() {
+//            @Override
+//            public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+//
+//                Log.e(TAG, "name = " + name);
+//                int n = attrs.getAttributeCount();
+//                for (int i = 0; i < n; i++) {
+//                    Log.e(TAG, attrs.getAttributeName(i) + " , " + attrs.getAttributeValue(i));
+//                }
+//
+//                return null;
+//            }
+//
+//            @Override
+//            public View onCreateView(String name, Context context, AttributeSet attrs) {
+//
+//                return null;
+//            }
+//        });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -52,18 +51,8 @@ public class MainActivity extends AppCompatActivity {
 //                .create()
 //        );
 
-
-        new MyTest().onCreateView(null, null, null);
-
     }
 
-    class MyTest implements LayoutInflater.Factory {
-        @Override
-        public View onCreateView(String name, Context context, AttributeSet attrs) {
-            Log.d(TAG, "MyTest");
-            return null;
-        }
-    }
 
 
 }
