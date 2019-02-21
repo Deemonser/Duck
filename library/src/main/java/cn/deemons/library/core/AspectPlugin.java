@@ -1,13 +1,9 @@
 package cn.deemons.library.core;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import org.aspectj.lang.JoinPoint;
@@ -18,15 +14,9 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import cn.deemons.library.R;
-import cn.deemons.library.shape.ShapeUtils;
 import cn.deemons.library.view.DuckFrameLayout;
 import cn.deemons.library.view.DuckRelativeLayout;
-
-import static android.graphics.drawable.GradientDrawable.LINE;
-import static android.graphics.drawable.GradientDrawable.OVAL;
-import static android.graphics.drawable.GradientDrawable.RECTANGLE;
-import static android.graphics.drawable.GradientDrawable.RING;
+import cn.deemons.library.view.DuckTableLayout;
 
 /**
  * author： deemons
@@ -48,16 +38,16 @@ public class AspectPlugin {
     public void callLayoutInflater() {
     }
 
-
-    @Pointcut("execution(* *..AppCompatViewInflater+.createView(..))")
-    public void callCreateView() {
-    }
-
-
-    //@Pointcut("call(android.view.ViewGroup+.new(..))")
-    @Pointcut("execution(android.view.ViewGroup+.new(..))")
-    public void callViewGroupConstructor() {
-    }
+//
+//    @Pointcut("execution(* *..AppCompatViewInflater+.createView(..))")
+//    public void callCreateView() {
+//    }
+//
+//
+//    //@Pointcut("call(android.view.ViewGroup+.new(..))")
+//    @Pointcut("execution(android.view.ViewGroup+.new(..))")
+//    public void callViewGroupConstructor() {
+//    }
 
 
     @Around("callLayoutInflater()")
@@ -92,6 +82,8 @@ public class AspectPlugin {
                 return new LinearLayoutCompat(context, attrs);
             case "FrameLayout":
                 return new DuckFrameLayout(context, attrs);
+            case "TableLayout":
+                return new DuckTableLayout(context, attrs);
             default:
                 break;
         }
@@ -106,11 +98,9 @@ public class AspectPlugin {
         Signature signature = joinPoint.getSignature();
         Log.d(TAG, "inject =====> " + signature.toString());
 
-
         Object target = joinPoint.getTarget();
 
         Object[] args = joinPoint.getArgs();
-
 
         int length = args.length;
         if (!(target instanceof View) || length < 2 || target.hashCode() == lastHash || !(args[0] instanceof Context) || !(args[1] instanceof AttributeSet)) {
@@ -126,7 +116,6 @@ public class AspectPlugin {
         for (int i = 0; i < count; i++) {
             Log.i(TAG, attrs.getAttributeName(i) + " = " + attrs.getAttributeValue(i));
         }
-
 
         Log.i(TAG, "inject =====> " + signature.toString());
         DuckFactor.getFactor().inject((View) target, context, attrs);

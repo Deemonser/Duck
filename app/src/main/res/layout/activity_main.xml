@@ -4,10 +4,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="30dp"
     tools:context="cn.deemons.duck.MainActivity"
     tools:ignore="MissingPrefix">
 
@@ -33,20 +35,33 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="100dp"
-        app:corner="30dp"
+        android:layout_height="wrap_content"
+        app:corner="20dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:solid="@color/colorAccent">
+        app:shape="rectangle"
+        app:solid="@color/colorAccent"
+        app:stroke_color="@color/colorPrimary"
+        app:stroke_width="1dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="5dp"
+            android:text="LinearLayout 中的 TextView"
+            android:textColor="#fff"
+            app:corner="2dp"
+            app:solid="@color/colorPrimary" />
 
     </LinearLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="100dp"
-        app:corner="30dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:corner="20dp"
+        app:corner_top_left="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:solid="@color/colorPrimaryDark">
 
@@ -55,13 +70,44 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="100dp"
-        app:corner="30dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        app:corner="20dp"
+
         app:layout_constraintTop_toTopOf="parent"
         app:solid="@color/colorAccent">
 
     </FrameLayout>
+
+
+    <TextView
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="待发布"
+        android:textColor="#ffffff"
+        android:textSize="9sp"
+        app:corner_top_left="3dp"
+        app:corner_top_right="3dp"
+        app:solid="#FB8F69" />
+
+    <TextView
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="00:00"
+        android:textColor="#FB8F69"
+        android:textSize="9sp"
+        app:corner_bottom_left="3dp"
+        app:corner_bottom_right="3dp"
+        app:stroke_color="#FB8F69"
+        app:stroke_width="1dp" />
+
+    <Button
+        android:text="test"
+        android:background="@drawable/test"
+        android:layout_width="200dp"
+        android:layout_height="30dp" />
 
 
 </LinearLayout>

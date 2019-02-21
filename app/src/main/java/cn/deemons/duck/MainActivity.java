@@ -1,22 +1,22 @@
 package cn.deemons.duck;
 
-import android.content.Context;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.v4.view.LayoutInflaterCompat;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
 //        LayoutInflaterCompat.setFactory2(LayoutInflater.from(this), new LayoutInflater.Factory2() {
 //            @Override
 //            public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 //                return null;
 //            }
 //        });
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
 //        TextView view = findViewById(R.id.text);
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
 //                .create()
 //        );
 
-    }
 
+    }
 
 
 }

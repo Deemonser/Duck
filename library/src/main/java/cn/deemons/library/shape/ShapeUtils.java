@@ -1,9 +1,13 @@
 package cn.deemons.library.shape;
 
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -48,6 +52,11 @@ public class ShapeUtils {
         return this;
     }
 
+//    public ShapeUtils solid(@Nullable ColorStateList colorStateList) {
+//        mDrawable.setColor(colorStateList);
+//        return this;
+//    }
+
     public ShapeUtils stroke(int width, @ColorInt int color) {
         mDrawable.setStroke(width, color);
         return this;
@@ -65,26 +74,37 @@ public class ShapeUtils {
 
 
     public ShapeUtils corners(float topLeft, float topRight, float bottomRight, float bottomLeft) {
-        float[] floats = {topLeft, topRight, bottomRight, bottomLeft};
+        float[] floats = {topLeft, topLeft, topRight, topRight, bottomRight, bottomRight, bottomLeft, bottomLeft};
         mDrawable.setCornerRadii(floats);
         return this;
     }
 
+
+    /**
+     * 线性渐变
+     */
     public ShapeUtils gradientLinear(GradientDrawable.Orientation orientation) {
         mDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         mDrawable.setOrientation(orientation);
         return this;
     }
 
+    /**
+     * 扫描渐变
+     */
     public ShapeUtils gradientSweep(float centerX, float centerY) {
         mDrawable.setGradientType(GradientDrawable.SWEEP_GRADIENT);
         mDrawable.setGradientCenter(centerX, centerY);
         return this;
     }
 
-    public ShapeUtils gradientRadial(float centerX, float centerY) {
+    /**
+     * 圆形渐变,以中心为起始，向四周扩散
+     */
+    public ShapeUtils gradientRadial(float centerX, float centerY, float radius) {
         mDrawable.setGradientType(GradientDrawable.RADIAL_GRADIENT);
         mDrawable.setGradientCenter(centerX, centerY);
+        mDrawable.setGradientRadius(radius);
         return this;
     }
 
