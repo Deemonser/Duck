@@ -5,9 +5,11 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.shapes.Shape;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -52,18 +54,31 @@ public class ShapeUtils {
         return this;
     }
 
-//    public ShapeUtils solid(@Nullable ColorStateList colorStateList) {
-//        mDrawable.setColor(colorStateList);
-//        return this;
-//    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ShapeUtils solid(@Nullable ColorStateList colorStateList) {
+        mDrawable.setColor(colorStateList);
+        return this;
+    }
 
     public ShapeUtils stroke(int width, @ColorInt int color) {
         mDrawable.setStroke(width, color);
         return this;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ShapeUtils stroke(int width, @Nullable ColorStateList colorStateList) {
+        mDrawable.setStroke(width, colorStateList);
+        return this;
+    }
+
     public ShapeUtils stroke(int width, @ColorInt int color, float dashGap, float dashWidth) {
         mDrawable.setStroke(width, color, dashGap, dashWidth);
+        return this;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ShapeUtils stroke(int width, @Nullable ColorStateList colorStateList, float dashGap, float dashWidth) {
+        mDrawable.setStroke(width, colorStateList, dashGap, dashWidth);
         return this;
     }
 

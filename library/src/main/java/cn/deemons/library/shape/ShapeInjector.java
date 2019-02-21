@@ -1,9 +1,11 @@
 package cn.deemons.library.shape;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -33,6 +35,7 @@ public class ShapeInjector implements Injector {
         int sizeHeight = shapeType.getColor(R.styleable.Shape_size_height, -3);
 
         int solidColor = shapeType.getColor(R.styleable.Shape_solid, -1);
+        ColorStateList solidColorStateList = shapeType.getColorStateList(R.styleable.Shape_solid);
         float corner = shapeType.getDimension(R.styleable.Shape_corner, -1);
 
         float topLeft = shapeType.getDimension(R.styleable.Shape_corner_top_left, 0);
@@ -79,9 +82,13 @@ public class ShapeInjector implements Injector {
             utils.size(sizeWidth != -3 ? sizeWidth : -1, sizeHeight != -3 ? sizeHeight : -1);
         }
 
-        if (solidColor != -1) {
+        if (solidColor != -1 || solidColorStateList != null) {
             utils = checkAndCreateShapeUtils(utils);
-            utils.solid(solidColor);
+            if (solidColorStateList != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                utils.solid(solidColorStateList);
+            } else if (solidColor != -1) {
+                utils.solid(solidColor);
+            }
         }
 
         if (corner > 0) {
