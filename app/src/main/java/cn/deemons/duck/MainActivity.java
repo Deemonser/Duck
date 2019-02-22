@@ -1,8 +1,13 @@
 package cn.deemons.duck;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
 //        LayoutInflaterCompat.setFactory2(LayoutInflater.from(this), new LayoutInflater.Factory2() {
 //            @Override
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 //        TextView view = findViewById(R.id.text);
@@ -53,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 
 }

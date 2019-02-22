@@ -41,11 +41,11 @@
             <flag name="tl_br" value="8" />
         </attr>
 
-        <attr name="gradient_sweep_centerX" format="dimension" />
-        <attr name="gradient_sweep_centerY" format="dimension" />
+        <attr name="gradient_sweep_centerX" format="float" />
+        <attr name="gradient_sweep_centerY" format="float" />
 
-        <attr name="gradient_radial_centerX" format="dimension" />
-        <attr name="gradient_radial_centerY" format="dimension" />
+        <attr name="gradient_radial_centerX" format="float" />
+        <attr name="gradient_radial_centerY" format="float" />
         <attr name="gradient_radial_radius" format="dimension" />
 
 
