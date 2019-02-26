@@ -1,17 +1,7 @@
 package cn.deemons.duck;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
