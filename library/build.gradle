@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
 
 
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -25,13 +25,22 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    api 'org.aspectj:aspectjrt:1.8.+'
-
+    api 'org.aspectj:aspectjrt:1.8.13'
+    api 'com.android.support:support-annotations:28.0.0'
 }
+
+//for upload
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    userOrg = 'deemons' //注册的用户名
+    groupId = 'com.deemons.duck' //引用时第一部分
+    artifactId = 'duck' //引用时的第二部分
+    publishVersion = '0.0.2' //引用时的第三部分，版本号
+    desc = 'android shape'//描述
+    website = 'https://github.com/Deemonser/Duck'//项目地址
+}
+

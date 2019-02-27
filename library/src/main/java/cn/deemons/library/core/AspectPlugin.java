@@ -1,24 +1,14 @@
 package cn.deemons.library.core;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
-import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.AppCompatCheckedTextView;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
-import android.support.v7.widget.AppCompatRadioButton;
-import android.support.v7.widget.AppCompatRatingBar;
-import android.support.v7.widget.AppCompatSeekBar;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-
+import cn.deemons.library.view.DuckFrameLayout;
+import cn.deemons.library.view.DuckLinearLayout;
+import cn.deemons.library.view.DuckRelativeLayout;
+import cn.deemons.library.view.DuckScrollView;
+import cn.deemons.library.view.DuckTableLayout;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -26,11 +16,6 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-
-import cn.deemons.library.view.DuckFrameLayout;
-import cn.deemons.library.view.DuckRelativeLayout;
-import cn.deemons.library.view.DuckScrollView;
-import cn.deemons.library.view.DuckTableLayout;
 
 /**
  * author： deemons
@@ -93,39 +78,13 @@ public class AspectPlugin {
             case "RelativeLayout":
                 return new DuckRelativeLayout(context, attrs);
             case "LinearLayout":
-                return new LinearLayoutCompat(context, attrs);
+                return new DuckLinearLayout(context, attrs);
             case "FrameLayout":
                 return new DuckFrameLayout(context, attrs);
             case "TableLayout":
                 return new DuckTableLayout(context, attrs);
             case "ScrollView":
                 return new DuckScrollView(context, attrs);
-            case "TextView":
-                return new AppCompatTextView(context, attrs);
-            case "ImageView":
-                return new AppCompatImageView(context, attrs);
-            case "Button":
-                return new AppCompatButton(context, attrs);
-            case "EditText":
-                return new AppCompatEditText(context, attrs);
-            case "Spinner":
-                return new AppCompatSpinner(context, attrs);
-            case "ImageButton":
-                return new AppCompatImageButton(context, attrs);
-            case "CheckBox":
-                return new AppCompatCheckBox(context, attrs);
-            case "RadioButton":
-                return new AppCompatRadioButton(context, attrs);
-            case "CheckedTextView":
-                return new AppCompatCheckedTextView(context, attrs);
-            case "AutoCompleteTextView":
-                return new AppCompatAutoCompleteTextView(context, attrs);
-            case "MultiAutoCompleteTextView":
-                return new AppCompatMultiAutoCompleteTextView(context, attrs);
-            case "RatingBar":
-                return new AppCompatRatingBar(context, attrs);
-            case "SeekBar":
-                return new AppCompatSeekBar(context, attrs);
             default:
                 break;
         }
