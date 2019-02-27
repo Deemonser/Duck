@@ -4,6 +4,7 @@ Duck 能帮助开发者直接在 xml 的任意控件上实现 shape 效果，而
 <br>
 
 #### 使用
+compile 'com.deemons.duck:duck:0.0.2'
 
 #### 原理
 
