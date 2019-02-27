@@ -1,113 +1,402 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:padding="30dp"
+    android:background="#EFEFF4"
     tools:context="cn.deemons.duck.MainActivity"
     tools:ignore="MissingPrefix">
 
-    <!--<TextView-->
-    <!--android:id="@+id/text"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Hello World!"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:solid="#f06200" />-->
-
-
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--app:corner="20dp"-->
-    <!--app:stroke_color="#f06200"-->
-    <!--app:stroke_width="1dp" />-->
-
 
     <LinearLayout
+        android:id="@+id/root_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:corner="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shape="rectangle"
-        app:solid="@color/colorAccent"
-        app:stroke_color="@color/colorPrimary"
-        app:stroke_width="1dp">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="圆角为高度一半\n corner 大于等于高度一半"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:corner="300dp"
+            app:stroke_color="@color/colorPrimary"
+            app:stroke_width="1dp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="指定圆角大小"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:stroke_color="@color/colorPrimary"
+            app:stroke_width="1dp" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:text="指"
+                android:textColor="@color/colorPrimary"
+                app:corner_top_left="10dp"
+                app:stroke_color="@color/colorPrimary"
+                app:stroke_width="1dp" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:text="定"
+                android:textColor="@color/colorPrimary"
+                app:corner_top_right="10dp"
+                app:stroke_color="@color/colorPrimary"
+                app:stroke_width="1dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:paddingTop="-2dp"
+                android:paddingRight="-2dp"
+                android:text="方"
+                android:textColor="@color/colorPrimary"
+                app:corner_bottom_left="10dp"
+                app:stroke_color="@color/colorPrimary"
+                app:stroke_width="1dp" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:text="向"
+                android:textColor="@color/colorPrimary"
+                app:corner_bottom_right="10dp"
+                app:stroke_color="@color/colorPrimary"
+                app:stroke_width="1dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="指定背景色、圆角"
+            app:size_height="5dp"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:solid="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="指定背景色、圆角及边框"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:solid="@color/colorPrimary"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:padding="5dp"
-            android:text="LinearLayout 中的 TextView"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="指定背景色、边框色为 SelectorColor \n点击查看效果\n 要求 API 大于等于21"
             android:textColor="#fff"
-            app:corner="2dp"
-            app:solid="@color/colorPrimary" />
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:solid="@color/selector_press_color"
+            app:stroke_color="@color/selector_press_stroke_color"
+            app:stroke_width="2dp" />
 
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="指定背景色、圆角及边框(虚线)"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:solid="@color/colorPrimary"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_dash_gap="20dp"
+            app:stroke_dash_width="10dp"
+            app:stroke_width="2dp" />
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="线性渐变(支持指定8个方向)"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:gradient_color_center="@color/colorPrimary"
+            app:gradient_color_end="@color/colorPrimaryDark"
+            app:gradient_color_start="#fff"
+            app:gradient_linear_orientation="left_right"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp" />
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="扫描渐变(指定中心)"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:gradient_color_center="#fff"
+            app:gradient_color_end="@color/colorPrimaryDark"
+            app:gradient_color_start="@color/colorPrimary"
+            app:gradient_sweep_centerX="0.2"
+            app:gradient_sweep_centerY="0.7"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp" />
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="径向渐变(指定中心及半径)"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            app:corner="8dp"
+            app:gradient_color_center="#fff"
+            app:gradient_color_end="@color/colorPrimaryDark"
+            app:gradient_color_start="@color/colorPrimary"
+            app:gradient_radial_centerX="0.5"
+            app:gradient_radial_centerY="0.5"
+            app:gradient_radial_radius="80dp"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="上述效果全部是在 TextView 上完成\n其实 Duck 支持任意控件" />
+
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:text="Button"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            app:corner="40dp"
+            app:solid="@color/selector_press_color"
+            app:stroke_color="@color/selector_press_stroke_color"
+            app:stroke_width="2dp" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="2dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher_round"
+            app:solid="@color/selector_press_color"
+            app:stroke_width="2dp" />
+
+
+        <EditText
+            android:layout_width="200dp"
+            android:hint="EditText"
+            app:corner="5dp"
+            app:stroke_width="1dp"
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
+            app:stroke_color="@color/colorPrimary"
+            android:layout_height="40dp" />
+
+        <cn.deemons.duck.CustomView
+            android:layout_width="200dp"
+            app:corner="20dp"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="40dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:corner_top_left="20dp"
+            app:corner_top_right="20dp"
+            app:solid="@color/colorPrimary"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="20dp"
+                android:text="RelativeLayout"
+                android:textColor="#fff" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:corner_bottom_left="20dp"
+            app:corner_bottom_right="20dp"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="LinearLayout"/>
+
+
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:corner_bottom_right="20dp"
+            app:corner_top_left="20dp"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="FrameLayout" />
+
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:corner_bottom_left="20dp"
+            app:corner_top_right="20dp"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="ScrollView" />
+
+        </ScrollView>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:corner="20dp"
+            app:solid="@color/colorPrimary"
+            app:stroke_color="@color/colorPrimaryDark"
+            app:stroke_width="1dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="ConstraintLayout"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="待发布"
+            android:textColor="#ffffff"
+            android:textSize="9sp"
+            app:corner_top_left="3dp"
+            app:corner_top_right="3dp"
+            app:solid="#FB8F69" />
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="00:00"
+            android:textColor="#FB8F69"
+            android:textSize="9sp"
+            app:corner_bottom_left="3dp"
+            app:corner_bottom_right="3dp"
+            app:stroke_color="#FB8F69"
+            app:stroke_width="1dp" />
     </LinearLayout>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        app:corner="20dp"
-        app:corner_top_left="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:solid="@color/colorPrimaryDark">
-
-    </RelativeLayout>
-
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        app:corner="20dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:solid="@color/colorAccent">
-
-    </FrameLayout>
-
-
-    <TextView
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="待发布"
-        android:textColor="#ffffff"
-        android:textSize="9sp"
-        app:corner_top_left="3dp"
-        app:corner_top_right="3dp"
-        app:solid="#FB8F69" />
-
-    <TextView
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="00:00"
-        android:textColor="#FB8F69"
-        android:textSize="9sp"
-        app:corner_bottom_left="3dp"
-        app:corner_bottom_right="3dp"
-        app:stroke_color="#FB8F69"
-        app:stroke_width="1dp" />
-
-    <Button
-        android:text="test"
-        android:background="@drawable/test"
-        app:solid="@color/selector_press_color"
-        android:layout_width="200dp"
-        android:layout_height="30dp" />
-
-
-</LinearLayout>
+</ScrollView>

@@ -3,14 +3,12 @@ package cn.deemons.library.shape;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -24,6 +22,8 @@ import cn.deemons.library.core.Injector;
  */
 public class ShapeInjector implements Injector {
 
+    static final int COLOR_EMPTY_VALUE = -2;
+    static final int SIZE_EMPTY_VALUE = -3;
 
     @Override
     public void inject(View view, Context context, AttributeSet attrs) {
@@ -31,10 +31,10 @@ public class ShapeInjector implements Injector {
         TypedArray shapeType = context.obtainStyledAttributes(attrs, R.styleable.Shape);
 
         int shape = shapeType.getInt(R.styleable.Shape_shape, -1);
-        int sizeWidth = shapeType.getColor(R.styleable.Shape_size_width, -3);
-        int sizeHeight = shapeType.getColor(R.styleable.Shape_size_height, -3);
+        int sizeWidth = shapeType.getDimensionPixelOffset(R.styleable.Shape_size_width, SIZE_EMPTY_VALUE);
+        int sizeHeight = shapeType.getDimensionPixelOffset(R.styleable.Shape_size_height, SIZE_EMPTY_VALUE);
 
-        int solidColor = shapeType.getColor(R.styleable.Shape_solid, -1);
+        int solidColor = shapeType.getColor(R.styleable.Shape_solid, COLOR_EMPTY_VALUE);
         ColorStateList solidColorStateList = shapeType.getColorStateList(R.styleable.Shape_solid);
         float corner = shapeType.getDimension(R.styleable.Shape_corner, -1);
 
@@ -51,23 +51,24 @@ public class ShapeInjector implements Injector {
 
 
         int strokeWidth = shapeType.getDimensionPixelOffset(R.styleable.Shape_stroke_width, 0);
-        int strokeColor = shapeType.getColor(R.styleable.Shape_stroke_color, -1);
+        int strokeColor = shapeType.getColor(R.styleable.Shape_stroke_color, COLOR_EMPTY_VALUE);
+        ColorStateList strokeColorStateList = shapeType.getColorStateList(R.styleable.Shape_stroke_color);
         float strokeDashGap = shapeType.getDimension(R.styleable.Shape_stroke_dash_gap, 0);
         float strokeDashWidth = shapeType.getDimension(R.styleable.Shape_stroke_dash_width, 0);
 
         //线性渐变
         int gradientLinearOrientation = shapeType.getInt(R.styleable.Shape_gradient_linear_orientation, 0);
 
-        float gradientSweepCenterX = shapeType.getDimension(R.styleable.Shape_gradient_sweep_centerX, -1);
-        float gradientSweepCenterY = shapeType.getDimension(R.styleable.Shape_gradient_sweep_centerY, -1);
+        float gradientSweepCenterX = shapeType.getFloat(R.styleable.Shape_gradient_sweep_centerX, -1);
+        float gradientSweepCenterY = shapeType.getFloat(R.styleable.Shape_gradient_sweep_centerY, -1);
 
-        float gradientRadialCenterX = shapeType.getDimension(R.styleable.Shape_gradient_radial_centerX, -1);
-        float gradientRadialCenterY = shapeType.getDimension(R.styleable.Shape_gradient_radial_centerY, -1);
+        float gradientRadialCenterX = shapeType.getFloat(R.styleable.Shape_gradient_radial_centerX, -1);
+        float gradientRadialCenterY = shapeType.getFloat(R.styleable.Shape_gradient_radial_centerY, -1);
         float gradientRadialRadius = shapeType.getDimension(R.styleable.Shape_gradient_radial_radius, 0);
 
-        int gradientColorStart = shapeType.getColor(R.styleable.Shape_gradient_color_start, -1);
-        int gradientColorCenter = shapeType.getColor(R.styleable.Shape_gradient_color_center, -1);
-        int gradientColorEnd = shapeType.getColor(R.styleable.Shape_gradient_color_end, -1);
+        int gradientColorStart = shapeType.getColor(R.styleable.Shape_gradient_color_start, COLOR_EMPTY_VALUE);
+        int gradientColorCenter = shapeType.getColor(R.styleable.Shape_gradient_color_center, COLOR_EMPTY_VALUE);
+        int gradientColorEnd = shapeType.getColor(R.styleable.Shape_gradient_color_end, COLOR_EMPTY_VALUE);
 
         shapeType.recycle();
 
@@ -77,12 +78,12 @@ public class ShapeInjector implements Injector {
         if (shape != -1) {
             utils = new ShapeUtils(shape);
         }
-        if (sizeWidth != -3 || sizeHeight != -3) {
+        if (sizeWidth != SIZE_EMPTY_VALUE || sizeHeight != SIZE_EMPTY_VALUE) {
             utils = checkAndCreateShapeUtils(utils);
-            utils.size(sizeWidth != -3 ? sizeWidth : -1, sizeHeight != -3 ? sizeHeight : -1);
+            utils.size(sizeWidth != SIZE_EMPTY_VALUE ? sizeWidth : -1, sizeHeight != SIZE_EMPTY_VALUE ? sizeHeight : -1);
         }
 
-        if (solidColor != -1 || solidColorStateList != null) {
+        if (solidColor != COLOR_EMPTY_VALUE || solidColorStateList != null) {
             utils = checkAndCreateShapeUtils(utils);
             if (solidColorStateList != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 utils.solid(solidColorStateList);
@@ -106,10 +107,16 @@ public class ShapeInjector implements Injector {
             utils.padding((int) paddingLeft, (int) paddingTop, (int) paddingRight, (int) paddingBottom);
         }
 
-        if (strokeWidth > 0 && strokeColor != -1) {
+        if (strokeWidth > 0 && (strokeColor != COLOR_EMPTY_VALUE || strokeColorStateList != null)) {
             utils = checkAndCreateShapeUtils(utils);
-            if (strokeDashGap > 0 && strokeDashWidth > 0) {
-                utils.stroke(strokeWidth, strokeColor, strokeDashGap, strokeDashWidth);
+            if (strokeDashGap > 0 || strokeDashWidth > 0) {
+                if (strokeColorStateList != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    utils.stroke(strokeWidth, strokeColorStateList, strokeDashGap > 0 ? strokeDashGap : 0, strokeDashWidth > 0 ? strokeDashWidth : 0);
+                } else {
+                    utils.stroke(strokeWidth, strokeColor, strokeDashGap > 0 ? strokeDashGap : 0, strokeDashWidth > 0 ? strokeDashWidth : 0);
+                }
+            } else if (strokeColorStateList != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                utils.stroke(strokeWidth, strokeColorStateList);
             } else {
                 utils.stroke(strokeWidth, strokeColor);
             }
@@ -146,21 +153,26 @@ public class ShapeInjector implements Injector {
             utils.gradientRadial(gradientRadialCenterX > 0 ? gradientRadialCenterX : 0.5f, gradientRadialCenterY > 0 ? gradientRadialCenterY : 0.5f, gradientRadialRadius);
         }
 
-        if (gradientColorStart != -1 || gradientColorCenter != -1 || gradientColorEnd != -1) {
+        if (gradientColorStart != COLOR_EMPTY_VALUE || gradientColorCenter != COLOR_EMPTY_VALUE || gradientColorEnd != COLOR_EMPTY_VALUE) {
             utils = checkAndCreateShapeUtils(utils);
             ArrayList<Integer> list = new ArrayList<>();
-            list.add(gradientColorStart != -1 ? Color.BLACK : gradientColorStart);
-            if (gradientColorCenter != -1) {
+
+            if (gradientColorStart != COLOR_EMPTY_VALUE) {
+                list.add(gradientColorStart);
+            }
+            if (gradientColorCenter != COLOR_EMPTY_VALUE) {
                 list.add(gradientColorCenter);
             }
-            list.add(gradientColorEnd != -1 ? Color.BLACK : gradientColorEnd);
+            if (gradientColorEnd != COLOR_EMPTY_VALUE) {
+                list.add(gradientColorEnd);
+            }
 
             int[] colors = new int[list.size()];
             for (int i = 0; i < list.size(); i++) {
                 colors[i] = list.get(i);
             }
+            Log.i("Duck", "gradientColor " + colors.length);
             utils.gradientColor(colors);
-
         }
 
 
