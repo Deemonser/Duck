@@ -378,6 +378,7 @@
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="20dp"
             android:text="待发布"
             android:textColor="#ffffff"
             android:textSize="9sp"
