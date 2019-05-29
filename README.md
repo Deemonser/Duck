@@ -11,7 +11,7 @@ Duck 能帮助开发者直接在 xml 的任意控件上实现 Shape 效果，无
 
 #### 使用
 
-1.在项目的 build.gradle 文件下添加插件依赖
+1. 在项目的 build.gradle 文件下添加插件依赖
 
 ```gr
 buildscript {
@@ -23,13 +23,13 @@ buildscript {
 }
 ```
 
-2.在模块的 build.gradle 文件下添加
+2. 在模块的 build.gradle 文件下添加
 
 ```groovy
 api 'com.deemons.duck:duck:0.0.2'
 ```
 
-3.可选
+3. 可选
 
 在 xml 中使用自定义属性时，是没有提示的，我们可以通过 `Live Template` 来实现。
 
@@ -37,7 +37,7 @@ api 'com.deemons.duck:duck:0.0.2'
 
 ![14-06-02](img/14-06-02.gif)
 
-4.直接在 xml 中使用
+4. 直接在 xml 中使用
 
 ~~~xml
         <TextView
@@ -54,6 +54,21 @@ api 'com.deemons.duck:duck:0.0.2'
             app:stroke_width="2dp" />
 
 ~~~
+
+或者在代码中使用
+
+```java
+        TextView view = findViewById(R.id.text);
+ 
+        view.setBackground(new ShapeUtils(GradientDrawable.RECTANGLE)
+                .corner(10)
+                .stroke(3, Color.parseColor("#0000ff"))
+                .gradientLinear(GradientDrawable.Orientation.LEFT_RIGHT)
+                .gradientColor(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW)
+                .create()
+        );
+
+```
 
 
 
@@ -83,7 +98,50 @@ api 'com.deemons.duck:duck:0.0.2'
 
 #### 原理
 
+在考虑用什么技术实现时，考虑这几点：
+
+1. 任何控件都能有效，即使是自定义控件。
+2. 不能有侵入性，即使更换或废弃本库，也能保证稳定性。
+
+最开始，第一个想到的是 `LayoutInflater.Factory` ，xml 控件解析成 View时，必须经过它，也是换肤的解决方案，但这样得一个个替换成自己的，非常麻烦。
+
+有没有更好的解决方案呢？
+
 **得益于 AspectJ 的 AOP（面向切面编程）能力，我们可以在编译时期，直接在 View 及其子类的构造方法中插入相关代码，解析xml 中自定义的属性，最后设置到控件上。**
+
+```java
+    @Pointcut("execution(android.view.View+.new(..))")
+    public void callViewConstructor() {
+    }
+
+    @After("callViewConstructor()")
+    public void inject(JoinPoint joinPoint) throws Throwable {
+
+        Signature signature = joinPoint.getSignature();
+        Object target = joinPoint.getTarget();
+        Object[] args = joinPoint.getArgs();
+
+        int length = args.length;
+        if (!(target instanceof View) || length < 2 || target.hashCode() == lastHash || !(args[0] instanceof Context) || !(args[1] instanceof AttributeSet)) {
+            return;
+        }
+        lastHash = target.hashCode();
+
+        Context context = (Context) args[0];
+        AttributeSet attrs = (AttributeSet) args[1];
+
+        int count = attrs.getAttributeCount();
+
+        for (int i = 0; i < count; i++) {
+            Log.i(TAG, attrs.getAttributeName(i) + " = " + attrs.getAttributeValue(i));
+        }
+
+        Log.i(TAG, "inject =====> " + signature.toString());
+        DuckFactor.getFactor().inject((View) target, context, attrs);
+    }
+```
+
+
 
 由于 AspectJ 能遍历项目中所有依赖包，因此，无论是 support 库，还是第三方库都能得到很好支持。
 
@@ -123,14 +181,64 @@ switch (name) {
 
 所以，我们我们仿照 support 的替换方式，直接在 `LayoutInflater.Factory.onCreateView` 方法中注入相应的替换代码。
 
+```java
+    
+    @Pointcut("execution(* *..LayoutInflater.Factory+.onCreateView(..))")
+    public void callLayoutInflater() {
+    }
+
+	@Around("callLayoutInflater()")
+    public Object replaceView(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		....
+            
+        switch (name) {
+            case "RelativeLayout":
+                return new DuckRelativeLayout(context, attrs);
+            case "LinearLayout":
+                return new DuckLinearLayout(context, attrs);
+            case "FrameLayout":
+                return new DuckFrameLayout(context, attrs);
+            case "TableLayout":
+                return new DuckTableLayout(context, attrs);
+            case "ScrollView":
+                return new DuckScrollView(context, attrs);
+            default:
+                break;
+        }
+
+        return result;
+    }
+
+```
+
+
+
 这个库的代码其实很少，我这里也只是实现了 Shape 这一个功能。
+
+```java
+    private static Injector mInjector;
+
+    public static void setFactor(Injector injector) {
+        mInjector = injector;
+    }
+
+    public static Injector getFactor() {
+        if (mInjector == null) {
+            mInjector = new ShapeInjector();
+        }
+        return mInjector;
+    }
+```
+
+这里保留的 Duck 的扩展性，如果觉得不够，可以自行实现功能更强大的 Injector 来替换默认的。
 
 AOP 的能力远不止如此，还有很多事情可以做，建议大家可以发挥想象，进行更多的扩展。
 
 <br>
 
 ### 初衷
-这个库由来的原因，是因为公司一个维护了 4 年的项目。
+这个库的由来，是因为公司一个维护了 4 年的项目。
 
 经历 4 年的项目，产品设计不知道改了多少版，期间产生并堆砌大量`shape.xml` 文件，这些文件因为索引的问题往往还无法清理。
 

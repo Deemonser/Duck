@@ -2,6 +2,7 @@ package cn.deemons.duck;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import cn.deemons.library.core.DuckFactor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 //                .gradientColor(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW)
 //                .create()
 //        );
-
 
     }
 
