@@ -1,7 +1,7 @@
 ### Duck 文档
 Duck 能帮助开发者直接在 xml 的任意控件上实现 Shape 效果，无需创建额外的xml文件，并且没有任何侵入性。
 
-![duck](img/duck.gif)
+![duck](https://raw.githubusercontent.com/Deemonser/Duck/master/image/duck.gif)
 
 
 
@@ -35,7 +35,7 @@ api 'com.deemons.duck:duck:0.0.2'
 
 项目根目录下的 `settings_duck.jar` 文件，此文件已经设置了 AS 中的 Live Template，下载此文件并导入到系统设置中 `File` -> `Import setting` 。
 
-![14-06-02](img/14-06-02.gif)
+![14-06-02](https://raw.githubusercontent.com/Deemonser/Duck/master/image/14-06-02.gif)
 
 4. 直接在 xml 中使用
 
