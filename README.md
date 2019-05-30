@@ -141,6 +141,16 @@ api 'com.deemons.duck:duck:0.0.2'
     }
 ```
 
+AOP 相关内容，可以查看[AOP 系列](https://deemons.cn/categories/AOP/)  包含：
+
+[1.OOP 与 AOP](https://deemons.cn/2017/09/21/OOP%E4%B8%8EAOP/)	
+
+[2.Java 注解处理器](https://deemons.cn/2017/09/28/Java-%E6%B3%A8%E8%A7%A3%E5%A4%84%E7%90%86%E5%99%A8/)		 
+
+[3.Aspect](https://deemons.cn/2017/10/10/AspectJ/)  
+
+[4.Android中使用 Javassist](https://deemons.cn/2017/11/07/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Javassist/)
+
 
 
 由于 AspectJ 能遍历项目中所有依赖包，因此，无论是 support 库，还是第三方库都能得到很好支持。
