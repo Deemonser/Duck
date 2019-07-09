@@ -1,8 +1,7 @@
 package cn.deemons.duck;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import cn.deemons.library.core.DuckFactor;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

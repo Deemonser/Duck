@@ -27,6 +27,9 @@ buildscript {
 
 ```groovy
 api 'com.deemons.duck:duck:0.0.2'
+
+// support androidx
+api 'com.deemons.duck:duckx:1.0.0'
 ```
 
 3. 可选
